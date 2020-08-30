@@ -1,0 +1,35 @@
+{% if mitigate == 'divert_all' %}
+router bgp 18190
+neighbor 172.17.32.165 distribute-list DIVERT_ALL_INCAPSULA out
+neighbor 172.17.160.13 distribute-list DIVERT_ALL_INCAPSULA out
+neighbor 120.89.30.28 distribute-list DIVERT_ALL_ISP out
+do clear ip bgp * soft out
+{% elif mitigate =='no_divert_all' %}
+router bgp 18190
+neighbor 172.17.32.165 distribute-list DIVERT out
+neighbor 172.17.160.13 distribute-list DIVERT out
+neighbor 120.89.30.28 distribute-list NORMAL out
+do clear ip bgp * soft out
+{% elif mitigate == 'divert' %}
+ip access-list extended NORMAL
+no permit ip any any
+deny ip {{net.network_address}} {{net.hostmask}} any
+permit ip any any
+
+ip access-list extended DIVERT
+no deny ip any any
+permit ip {{net.network_address}} {{net.hostmask}} any
+deny ip any any
+do clear ip bgp * soft out
+{% elif mitigate == 'no_divert' %}
+ip access-list extended NORMAL
+no permit ip any any
+no deny ip {{net.network_address}} {{net.hostmask}} any
+permit ip any any
+
+ip access-list extended DIVERT
+no deny ip any any
+no permit ip {{net.network_address}} {{net.hostmask}} any
+deny ip any any
+do clear ip bgp * soft out
+{% endif %}

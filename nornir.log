@@ -1,0 +1,4 @@
+2020-08-29 19:35:02,683 -  nornir.core -     INFO -        run() - Running task 'ddos_automate' with args {} on 2 hosts
+2020-08-29 23:24:28,735 -  nornir.core -     INFO -        run() - Running task 'ddos_automate' with args {} on 2 hosts
+2020-08-30 21:43:34,802 -  nornir.core -     INFO -        run() - Running task 'ddos_automate' with args {} on 2 hosts
+2020-08-30 22:24:46,291 -  nornir.core -     INFO -        run() - Running task 'ddos_automate' with args {} on 2 hosts
